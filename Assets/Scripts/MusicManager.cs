@@ -4,6 +4,7 @@ public class MusicManager : MonoBehaviour
 {
 
     private float volume = 0.3f;
+    private const string PLAYER_PREFS_Music_VOLUME = "MusicVolume";
     private AudioSource audioSource;
     public static MusicManager Instance;
     private void Awake()
@@ -11,6 +12,9 @@ public class MusicManager : MonoBehaviour
         Instance = this;
 
         audioSource = GetComponent<AudioSource>();
+
+        volume = PlayerPrefs.GetFloat(PLAYER_PREFS_Music_VOLUME, 0.3f);
+        audioSource.volume = volume;
     }
 
     public void VolumeChange()
@@ -20,7 +24,9 @@ public class MusicManager : MonoBehaviour
             volume = 0f;
 
 
-            audioSource.volume = volume;
+        audioSource.volume = volume;
+        PlayerPrefs.SetFloat(PLAYER_PREFS_Music_VOLUME, volume);
+        PlayerPrefs.Save();
     }
     public float GetVolume()
     {
