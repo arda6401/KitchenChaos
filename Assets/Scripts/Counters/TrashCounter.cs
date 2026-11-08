@@ -17,6 +17,11 @@ public class TrashCounter : BaseCounter
         }
 
     }
+
+    new public static void ResetStaticData()
+    {
+        OnTrashed = null;
+    }
 }
 
 

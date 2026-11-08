@@ -23,6 +23,11 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
         if(kitchenObject != null)
         OnDropped?.Invoke();
     }
+
+    public static void ResetStaticData()
+    {
+        OnDropped = null;
+    }
     public KitchenObject GetKitchenObject()
     {
         return kitchenObject;
