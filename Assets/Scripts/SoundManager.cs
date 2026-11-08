@@ -17,6 +17,11 @@ public class SoundManager : MonoBehaviour
         TrashCounter.OnTrashed += OnTrashed;
     }
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
 
     private void OnRecipeSuccessed()
     {
@@ -58,5 +63,9 @@ public class SoundManager : MonoBehaviour
     private void PlaySound(AudioClip[] audioclipArray, Vector3 pos, float volume = 1f)
     {
         PlaySound(audioclipArray[Random.Range(0, audioclipArray.Length)], pos, volume);
+    }
+    public void PlayStepSound(Vector3 pos, float volume = 1f)
+    {
+        PlaySound(Sounds.footsteps, pos, volume);
     }
 }

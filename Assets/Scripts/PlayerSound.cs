@@ -5,6 +5,8 @@ public class PlayerSound : MonoBehaviour
 {
 
  private Player player;
+ private float footstepTimer;
+ private float footstepTimerMax = .1f;
 
     private void Awake()
     {
@@ -16,6 +18,17 @@ public class PlayerSound : MonoBehaviour
     //    player.OnPickedSomething += Player_OnPickedSomething;
       //  player.OnPickedUpSomething += Player_OnPickedUpSomething;
         //player.OnDroppedSomething += Player_OnDroppedSomething;
+    }
+
+    void Update()
+    {
+        footstepTimer -= Time.deltaTime;
+        if (footstepTimer < 0f)
+        {
+            footstepTimer = footstepTimerMax;
+           if (player.IsWalking())
+            SoundManager.Instance.PlayStepSound(player.transform.position);
+        }
     }
 
     private void Player_OnDroppedSomething(object sender, EventArgs e)

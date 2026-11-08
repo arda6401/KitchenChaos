@@ -19,11 +19,18 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     [SerializeField] private Transform KitchenObjectHoldPoint;
 
 
-
+           
 
     private BaseCounter selectedCounter;
     private KitchenObject kitchenObject;
     private Vector3 lastInteractDir;
+
+
+
+    public bool IsWalking()
+    {
+        return gameInput.GetMovementVectorNormalized() != Vector2.zero;
+    }
 
 
 
