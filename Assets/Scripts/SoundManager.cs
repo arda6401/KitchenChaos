@@ -7,6 +7,13 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private SoundSO Sounds;
 
 
+    private float volume = 1f;
+    private float MusicVolume = 1f;
+
+
+
+
+
     void Start()
     {
         DeliveryManager.Instance.OnRecipeSuccessed += OnRecipeSuccessed;
@@ -60,12 +67,23 @@ public class SoundManager : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(audio, pos, volume);
     }
-    private void PlaySound(AudioClip[] audioclipArray, Vector3 pos, float volume = 1f)
+    private void PlaySound(AudioClip[] audioclipArray, Vector3 pos, float volumeMixing = 1f)
     {
-        PlaySound(audioclipArray[Random.Range(0, audioclipArray.Length)], pos, volume);
+        PlaySound(audioclipArray[Random.Range(0, audioclipArray.Length)], pos, volume * volumeMixing);
     }
     public void PlayStepSound(Vector3 pos, float volume = 1f)
     {
         PlaySound(Sounds.footsteps, pos, volume);
+    }
+
+    public void VolumeChange()
+    {
+        volume += 0.1f;
+        if (volume > 1.1f)
+            volume = 0f;
+    }
+    public float GetVolume()
+    {
+        return volume * 10f;
     }
 }

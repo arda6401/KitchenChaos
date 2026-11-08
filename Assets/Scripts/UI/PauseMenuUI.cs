@@ -3,6 +3,8 @@ using UnityEngine;
 public class PauseMenuUI : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuGameObject;
+    
+
 
     private void Start()
     {
@@ -23,7 +25,12 @@ public class PauseMenuUI : MonoBehaviour
     public void QuitButton()
     {
         // todo: save game
-      Application.Quit();
+        Application.Quit();
+    }
+    public void OptionsButton()
+    {
+       OptionsUI.Instance.Show();
+        
     }
 
     private void GameManager_OnGameUnpaused()
