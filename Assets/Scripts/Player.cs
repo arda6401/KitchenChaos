@@ -65,13 +65,19 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     private void OnInteractionAction()
     {
         //        print("Interaction action triggered");
-        if (selectedCounter != null)
+
+        if(!GameManager.Instance.IsGamePlaying()) return;
+        if (selectedCounter != null )
         {
             selectedCounter.Interact(this);
         }
     }
     void OnInteractAlternativeAction()
     {
+        if(!GameManager.Instance.IsGamePlaying()) return;
+
+
+
         if (selectedCounter != null)
         {
             selectedCounter.InteractAlternative(this);
