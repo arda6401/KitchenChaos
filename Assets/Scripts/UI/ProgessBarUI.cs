@@ -8,6 +8,7 @@ public class ProgessBarUI : MonoBehaviour
     [SerializeField] private GameObject ProgressGameObject;
     [SerializeField] private Image progressBarImage;
     private IHasProgress HasProgress;
+    private Color defaultProgressBarColor;
 
 
     void Start()
@@ -20,6 +21,7 @@ public class ProgessBarUI : MonoBehaviour
         }
         
         HasProgress.OnProgressChanged += HasProgress_OnProgressChanged;
+        defaultProgressBarColor = progressBarImage.color;
         progressBarImage.fillAmount = 0f;
         Hide();
 
@@ -36,6 +38,16 @@ public class ProgessBarUI : MonoBehaviour
         {
             Hide();
         }
+    }
+
+    public void SetProgressBarColor(Color color)
+    {
+        progressBarImage.color = color;
+    }
+
+    public void ResetProgressBarColor()
+    {
+        progressBarImage.color = defaultProgressBarColor;
     }
 
     private void Show()
