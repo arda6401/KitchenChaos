@@ -73,6 +73,10 @@ public class SoundManager : MonoBehaviour
     {
         PlaySound(audioclipArray[Random.Range(0, audioclipArray.Length)], pos, volume * volumeMixing);
     }
+    public void PlayCountDownSound()
+    {
+        PlaySound(Sounds.warning, Vector3.zero);
+    }
     public void PlayStepSound(Vector3 pos, float volume = 1f)
     {
         PlaySound(Sounds.footsteps, pos, volume);
