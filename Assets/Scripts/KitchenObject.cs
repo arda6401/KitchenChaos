@@ -42,14 +42,14 @@ public class KitchenObject : MonoBehaviour
 
     public bool TryGetPlate(out PlateKitchenObject plateKitchenObject)
     {
-        if(this is KitchenObject)
+        if (this is PlateKitchenObject plate)
         {
-            plateKitchenObject= (PlateKitchenObject)this;
+            plateKitchenObject = plate;
             return true;
         }
         else
         {
-            plateKitchenObject=null;
+            plateKitchenObject = null;
             return false;
         }
     }
