@@ -14,3 +14,4 @@
 - [ ] Oyunu benzerlerinden ayıracak özgün bir mekanik veya tema geliştir.
 - [x] Tarif adlarında `recipeName` alanını göster; varlık dosya adına bağlı kalma.
 - [ ] Farklı ekran çözünürlüklerinde arayüzü ve temel oynanış akışını kontrol et.
+- [ ] Karakter görünüşünü değiştir.
