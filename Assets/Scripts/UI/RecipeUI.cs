@@ -11,7 +11,7 @@ public class RecipeUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI recipeNameText;
     public void Setup(RecipeSO recipe)
     {
-        recipeNameText.text = recipe.name;
+        recipeNameText.text = recipe.recipeName;
 
         foreach (KitchenObjectSO objectSO in recipe.kitchenObjectSOList)
         {
