@@ -19,33 +19,39 @@ public class GameManager : MonoBehaviour
     public event Action OnGameUnpaused;
 
     private State state;
-    private float WaitingToStartTimer = 1f;
+
     private float CountDownToStartTimer = 3f;
 
-    private float PlayingTimer = 10f;
-     private bool isGamePaused = false;
+    private float PlayingTimer = 100f;
+    private bool isGamePaused = false;
 
 
     private void Awake()
     {
         Instance = this;
-        state = State.WaitingToStart;
+        if (IsNewPlayer())
+            state = State.WaitingToStart;
+        else
+        state= State.CountdownToStart;
     }
 
     private void Start()
     {
         GameInputHandler.Instance.OnPauseAction += GameInputHandler_OnPauseAction;
+        GameInputHandler.Instance.OnInteractionAction += GameManager_OnInteract;
     }
 
     private void GameInputHandler_OnPauseAction()
     {
-        
-       TogglePauseGame();
+
+        TogglePauseGame();
     }
+
+
 
     public void TogglePauseGame()
     {
-         isGamePaused = !isGamePaused;
+        isGamePaused = !isGamePaused;
         if (isGamePaused)
         {
             Time.timeScale = 0f;
@@ -57,22 +63,27 @@ public class GameManager : MonoBehaviour
             OnGameUnpaused?.Invoke();
         }
     }
+    private void GameManager_OnInteract()
+    {
+
+       
+        PlayerPrefs.SetInt("PlayerHasCompletedTutorial", 1);
+        PlayerPrefs.Save();
+        state = State.CountdownToStart;
+        OnStateChanged?.Invoke();
+        GameInputHandler.Instance.OnInteractionAction -= GameManager_OnInteract;
+    }
 
     void Update()
     {
         switch (state)
         {
             case State.WaitingToStart:
-                WaitingToStartTimer -= Time.deltaTime;
-                if (WaitingToStartTimer < 0f)
-                {
-                    state = State.CountdownToStart;
-                    OnStateChanged?.Invoke();
-                }
+
                 break;
             case State.CountdownToStart:
 
-            CountDownToStartTimer -= Time.deltaTime;
+                CountDownToStartTimer -= Time.deltaTime;
                 if (CountDownToStartTimer < 0f)
                 {
                     state = State.GamePlaying;
@@ -81,7 +92,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.GamePlaying:
 
-            PlayingTimer -= Time.deltaTime;
+                PlayingTimer -= Time.deltaTime;
                 if (PlayingTimer < 0f)
                 {
                     state = State.GameOver;
@@ -113,4 +124,10 @@ public class GameManager : MonoBehaviour
     {
         return CountDownToStartTimer;
     }
+    private bool IsNewPlayer()
+    {
+        return PlayerPrefs.GetInt("PlayerHasCompletedTutorial") == 0;
+    }
+
+
 }
