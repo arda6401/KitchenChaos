@@ -12,5 +12,5 @@
 ### Oynanış ve arayüz
 - [ ] Siparişlerin süresi dolması, zorluk artışı ve oyun içi tempo için tasarım belirle.
 - [ ] Oyunu benzerlerinden ayıracak özgün bir mekanik veya tema geliştir.
-- [✔️] Tarif adlarında `recipeName` alanını göster; varlık dosya adına bağlı kalma.
+- [x] Tarif adlarında `recipeName` alanını göster; varlık dosya adına bağlı kalma.
 - [ ] Farklı ekran çözünürlüklerinde arayüzü ve temel oynanış akışını kontrol et.
